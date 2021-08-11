@@ -1,2 +1,3 @@
 # exchangeRate
-# exchange Rate for Shopware 5
+
+exchange Rate for Shopware 5
