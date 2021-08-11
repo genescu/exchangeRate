@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!--https://developers.shopware.com/developers-guide/example-plugin/-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Register TemplateRegistration subscriber -->
+        <service id="swag_exchange_rates.subscriber.template_registration"
+                 class="SwagExchangeRates\Subscriber\TemplateRegistration">
+            <argument>%swag_exchange_rates.plugin_dir%</argument>
+            <argument type="service" id="template"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="swag_exchange_rates.subscriber.models_subscriber"
+                 class="SwagExchangeRates\Subscriber\ModelSubscriber">
+            <tag name="doctrine.event_subscriber"/>
+        </service>
+
+        <service id="swag_exchange_rates.services.rates_service"  public="true" class="SwagExchangeRates\ExchangeBundle\Services\RatesService">
+            <argument type="service" id="guzzle_http_client_factory"/>
+        </service>
+
+    </services>
+
+</container>
+
